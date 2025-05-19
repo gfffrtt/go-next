@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gfffrtt/go-next/pkg/html"
 	"github.com/go-chi/chi/v5"
@@ -15,21 +16,40 @@ type Router struct {
 func (router *Router) Page(path string, handler func(r *http.Request) html.Element) *Router {
 	router.App.Get(path, func(w http.ResponseWriter, r *http.Request) {
 		stream := html.NewStream()
+
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "text/html")
+
 		flusher := w.(http.Flusher)
+
 		page := handler(r)
+
 		if router.Layout != nil {
 			page = router.Layout(page)
 		}
+
+		if path == "/" {
+			path = "/index"
+		}
+
+		if _, err := os.Stat("./build/router/" + path); err == nil {
+			page.AddChild(html.Script(map[string]string{
+				"src":  "/static/router" + path + "/index.js",
+				"type": "module",
+			}))
+		}
+
 		w.Write([]byte(page.Render(stream)))
+
 		flusher.Flush()
+
 		go func() {
 			for html := range stream.Channel {
 				w.Write([]byte(html))
 				flusher.Flush()
 			}
 		}()
+
 		stream.Wait()
 	})
 	return router

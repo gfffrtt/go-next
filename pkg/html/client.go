@@ -2,14 +2,11 @@ package html
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 func Client(id string, script string, data ...any) Element {
-	tag := String(fmt.Sprintf("<!-- $$bundle:%s -->", script))
-
 	if len(data) == 0 {
-		return tag
+		return Div(map[string]string{"data-id": id})
 	}
 
 	json, err := json.Marshal(data[0])
@@ -17,7 +14,6 @@ func Client(id string, script string, data ...any) Element {
 		panic(err)
 	}
 	return Fragment(
-		tag,
 		Div(map[string]string{"data-id": id}),
 		Tag(
 			"script",

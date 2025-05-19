@@ -11,10 +11,6 @@ func Layout(children ...html.Element) html.Element {
 			html.Meta(map[string]string{"name": "viewport", "content": "width=device-width, initial-scale=1.0"}),
 			html.Title(map[string]string{}, html.String("Go Next")),
 			html.Link(map[string]string{"rel": "stylesheet", "href": "https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"}),
-			html.Script(map[string]string{
-				"src":  "/static/router/go-next.js",
-				"type": "module",
-			}),
 		),
 		html.Body(
 			map[string]string{"class": "flex flex-col gap-5"},

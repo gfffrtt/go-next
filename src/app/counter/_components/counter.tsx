@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { getJson, getTargets } from "@/index";
 import { useState } from "react";
+import { getJson, getTargets } from "pkg/client/index";
 
 type Props = {
   count: number;

@@ -26,9 +26,6 @@
     "noPropertyAccessFromIndexSignature": false,
 
     // Paths
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./pkg/client/*"]
-    }
+    "baseUrl": "."
   }
 }
