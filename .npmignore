@@ -1,0 +1,6 @@
+*
+!build/pkg
+!package.json
+!README.md
+!tsconfig.json
+!LICENSE
