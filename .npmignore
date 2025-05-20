@@ -2,7 +2,7 @@
 *
 
 # But the actual files
-!build/pkg/
+!build/
 !package.json
 !README.md
 !tsconfig.json
