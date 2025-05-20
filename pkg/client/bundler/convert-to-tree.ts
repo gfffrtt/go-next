@@ -16,8 +16,10 @@ export const convertToTree = (
 
   const rootLayout = layouts.find(
     (layout) => layout.root === `${APP}/layout.go`
-  );
-  if (!rootLayout) return [];
+  ) || {
+    root: `${APP}/layout.go`,
+    clientComponents: [],
+  };
 
   const tree: Tree = {
     root: rootLayout.root,
