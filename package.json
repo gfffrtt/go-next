@@ -1,5 +1,5 @@
 {
-  "name": "go-next",
+  "name": "@gfffrtt/go-next",
   "version": "0.0.1",
   "type": "module",
   "main": "build/pkg/index.js",
