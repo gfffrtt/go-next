@@ -1,6 +1,6 @@
 {
   "name": "@gfffrtt/go-next",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "main": "build/pkg/index.js",
   "module": "build/pkg/index.mjs",
