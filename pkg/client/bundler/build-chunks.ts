@@ -90,7 +90,10 @@ export const buildChunks = async (trees: Tree[]) => {
     });
   }
 
-  await fs.rm(`${ROUTER_DIR}/build`, { recursive: true });
+  try {
+    await fs.access(`${ROUTER_DIR}/build`, constants.F_OK);
+    await fs.rm(`${ROUTER_DIR}/build`, { recursive: true });
+  } catch {}
 
   return chunks;
 };
