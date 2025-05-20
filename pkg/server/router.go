@@ -43,14 +43,12 @@ func (router *Router) Page(path string, handler func(r *http.Request) html.Eleme
 
 		flusher.Flush()
 
-		go func() {
-			for html := range stream.Channel {
-				w.Write([]byte(html))
-				flusher.Flush()
-			}
-		}()
+		go stream.Wait()
 
-		stream.Wait()
+		for html := range stream.Channel {
+			w.Write([]byte(html))
+			flusher.Flush()
+		}
 	})
 	return router
 }

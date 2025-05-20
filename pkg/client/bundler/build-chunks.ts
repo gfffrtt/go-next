@@ -60,7 +60,10 @@ export const buildChunks = async (trees: Tree[]) => {
     })
   );
 
-  await fs.rm(ROUTER_DIR, { recursive: true });
+  try {
+    await fs.access(ROUTER_DIR, constants.F_OK);
+    await fs.rm(ROUTER_DIR, { recursive: true });
+  } catch {}
 
   for (const [output, input] of entrypoints) {
     await build({

@@ -1,20 +1,36 @@
 {
   "name": "go-next",
-  "module": "index.ts",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "build/pkg/index.js",
+  "module": "build/pkg/index.mjs",
+  "types": "build/pkg/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./build/pkg/index.cjs",
+      "import": "./build/pkg/index.js"
+    }
+  },
+  "license": "MIT",
+  "bin": {
+    "build": "./build/cli/index.js"
+  },
+  "scripts": {
+    "build:pkg": "tsup pkg/client/index.tsx --format cjs,esm --dts --outDir build/pkg",
+    "build:cli": "tsup pkg/client/bundler/index.ts --format esm --clean --outDir build/cli",
+    "build": "bun run build:pkg && bun run build:cli"
+  },
   "devDependencies": {
+    "tsup": "^8.5.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5",
     "@types/bun": "latest",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^4.4.1",
     "glob": "^11.0.2",
-    "vite": "^6.3.5"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "private": true,
-  "type": "module",
-  "dependencies": {
+    "vite": "^6.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }

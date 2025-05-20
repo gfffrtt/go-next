@@ -1,6 +1,7 @@
 package html
 
 import (
+	"encoding/json"
 	"strconv"
 )
 
@@ -170,4 +171,12 @@ func Script(attributes map[string]string, children ...Element) Element {
 
 func Fragment(children ...Element) Element {
 	return Tag("fragment", map[string]string{}, children...)
+}
+
+func Json(id string, marshable any) Element {
+	data, err := json.Marshal(marshable)
+	if err != nil {
+		panic(err)
+	}
+	return Script(map[string]string{"data-client-component-id": id}, String(string(data)))
 }

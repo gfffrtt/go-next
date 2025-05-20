@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { glob } from "glob";
 import { APP } from "./constants";
 import { convertToTree } from "./convert-to-tree";
@@ -10,7 +11,7 @@ export const bundle = async () => {
   });
   const scripts = await Promise.all(paths.map((path) => compilePath(path)));
   const tree = convertToTree(scripts);
-  const chunks = await buildChunks(tree);
+  await buildChunks(tree);
 };
 
 bundle();

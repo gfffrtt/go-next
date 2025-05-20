@@ -13,13 +13,10 @@ import (
 func main() {
 	app := server.NewRouter().
 		WithStatic().
-		// Configures the persistant layout for all pages
 		WithLayout(app.Layout).
 		Page("/", app.Page).
 		Page("/about", about.Page).
-		// This route contains PPR (Partial Prerendering)
 		Page("/search", search.Page).
-		// This route contains a client component
 		Page("/counter", counter.Page)
 
 	http.ListenAndServe(":8080", app.App)
