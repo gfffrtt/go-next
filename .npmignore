@@ -1,5 +1,8 @@
+# Everything
 *
-!build/pkg
+
+# But the actual files
+!build/pkg/
 !package.json
 !README.md
 !tsconfig.json
